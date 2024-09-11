@@ -53,19 +53,19 @@ Navigate to `carla/Util/Docker` and use the following commands, each one will ta
 First, let's create a Docker image containing a compiled version of Unreal Engine 4 version `24.3`. Change the version if needed.
 
 ```
-ue4-docker build 4.24.3 --no-engine --no-minimal
+ue4-docker build custom -basetag ubuntu18.04 -branch carla -repo https://github.com/kannidekan/UnrealEngine.git --target build-prerequisites --target source
 ```
 
 Next, this will build the image with all the necessary requisites to build Carla in a **Ubuntu 18.04**
 
 ```
-docker build -t carla-prerequisites -f Prerequisites.Dockerfile .
+docker build -t carla-prerequisites -f Prerequisites.Dockerfile . --build-arg EPIC_USER=kannidekan --build-arg EPIC_PASS=xx
 ```
 
 Finally create the actual Carla image, it will search for `carla-prerequisites:latest`:
 
 ```
-docker build -t carla -f Carla.Dockerfile .
+docker build -t carla -f Carla.Dockerfile . --build-arg GIT_BRANCH=0.9.13-docker
 ```
 
 ---
