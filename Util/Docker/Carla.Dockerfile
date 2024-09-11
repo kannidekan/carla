@@ -10,9 +10,15 @@ RUN cd /home/carla/ && rm -rf carla && \
   else git clone --depth 1 --branch $GIT_BRANCH https://github.com/kannidekan/carla.git; fi && \
   cd /home/carla/carla && \
   ./Update.sh && \
-  make CarlaUE4Editor && \
-  make PythonAPI && \
-  make build.utils && \
+  make CarlaUE4Editor
+
+RUN cd /home/carla/carla && \
+  make PythonAPI
+
+RUN cd /home/carla/carla && \
+  make build.utils
+
+RUN cd /home/carla/carla && \
   make package && \
   rm -r /home/carla/carla/Dist
 
