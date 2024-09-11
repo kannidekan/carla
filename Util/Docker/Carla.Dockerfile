@@ -9,7 +9,9 @@ RUN cd /home/carla/ && rm -rf carla && \
   if [ -z ${GIT_BRANCH+x} ]; then git clone --depth 1 https://github.com/kannidekan/carla.git; \
   else git clone --depth 1 --branch $GIT_BRANCH https://github.com/kannidekan/carla.git; fi && \
   cd /home/carla/carla && \
-  ./Update.sh && \
+  ./Update.sh
+
+RUN cd /home/carla/carla && \
   make CarlaUE4Editor
 
 RUN cd /home/carla/carla && \
